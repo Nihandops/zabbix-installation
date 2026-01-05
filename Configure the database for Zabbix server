@@ -1,0 +1,3 @@
+Edit file /etc/zabbix/zabbix_server.conf
+
+DBPassword=password
