@@ -1,0 +1,2 @@
+systemctl restart zabbix-server zabbix-agent nginx php8.1-fpm
+systemctl enable zabbix-server zabbix-agent nginx php8.1-fpm
