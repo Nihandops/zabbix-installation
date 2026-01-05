@@ -1,0 +1,45 @@
+Step 1: Update/Upgrade Package Repository
+sudo apt update && apt upgrade
+
+Step 2: Install MySQL
+sudo apt update
+
+sudo apt install mysql-server
+
+sudo systemctl start mysql
+
+sudo systemctl enable mysql
+
+sudo systemctl status mysql
+
+Step 3: Securing MySQL
+sudo mysql_secure_installation
+
+Press the y key to confirm
+
+Step 4: Check if MySQL Service Is Running
+sudo systemctl status mysql
+
+Step 5: Log in to MySQL Server
+sudo mysql -u root
+
+Run the following on your database host.
+
+mysql -uroot -p
+password
+mysql> create database zabbix character set utf8mb4 collate utf8mb4_bin;
+mysql> create user zabbix@localhost identified by 'password';
+mysql> grant all privileges on zabbix.* to zabbix@localhost;
+mysql> set global log_bin_trust_function_creators = 1;
+mysql> quit;
+
+On Zabbix server host, import initial schema and data. You will be prompted to enter your newly created password.
+
+zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix -p zabbix
+
+Disable log_bin_trust_function_creators option after importing database schema.
+
+mysql -uroot -p
+password
+mysql> set global log_bin_trust_function_creators = 0;
+mysql> quit;
